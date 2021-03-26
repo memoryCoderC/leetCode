@@ -1,6 +1,6 @@
 //给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 的那 两个 整数，并返回它们的数组下标。 
 //
-// 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。 
+// 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。 
 //
 // 你可以按任意顺序返回答案。 
 //
@@ -39,35 +39,34 @@
 // 只会存在一个有效答案 
 // 
 // Related Topics 数组 哈希表 
-// 👍 10585 👎 0
+// 👍 10634 👎 0
+
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 //Java：两数之和
-public class Q1_两数之和 {
+public class P1TwoSum {
     public static void main(String[] args) {
-        Solution solution = new Solution();
-        int[] nums = new int[]{2, 7, 11, 15};
+        Solution solution = new P1TwoSum().new Solution();
         // TO TEST
-        System.out.println(Arrays.toString(solution.twoSum(nums, 9)));
     }
-}
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        HashMap<Integer, Integer> hashMap = new HashMap<>(nums.length);
-        for (int i = 0; i < nums.length; i++) {
-            Integer result = hashMap.get(target - nums[i]);
-            if (result != null) {
-                return new int[]{i, result};
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int[] twoSum(int[] nums, int target) {
+            HashMap<Integer, Integer> hashMap = new HashMap<>(nums.length);
+            for (int i = 0; i < nums.length; i++) {
+                Integer result = hashMap.get(target - nums[i]);
+                if (result != null) {
+                    return new int[]{i, result};
+                }
+                hashMap.put(nums[i], i);
             }
-            hashMap.put(nums[i], i);
+            return null;
         }
-        return null;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+
+}
