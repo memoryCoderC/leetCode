@@ -50,6 +50,7 @@ public class P5LongestPalindromicSubstring {
     public static void main(String[] args) {
         Solution solution = new P5LongestPalindromicSubstring().new Solution();
         // TO TEST
+        solution.longestPalindrome("babad");
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -75,7 +76,7 @@ public class P5LongestPalindromicSubstring {
         }
 
         private int getMaxLength(byte[] bytes, int leftPosition, int rightPosition) {
-            while (leftPosition > -1 && rightPosition < bytes.length & bytes[leftPosition] != bytes[rightPosition]) {
+            while (leftPosition >= 0 && rightPosition < bytes.length && bytes[leftPosition] == bytes[rightPosition]) {
                 leftPosition--;
                 rightPosition++;
             }
