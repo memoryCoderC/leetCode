@@ -25,7 +25,7 @@ public class P206ReverseLinkedList {
 
     public class ListNode {
         int val;
-        ListNode next;
+        public ListNode next;
 
         ListNode() {
         }
