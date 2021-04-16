@@ -58,10 +58,12 @@
 package leetcode.editor.cn;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 //Java：LRU 缓存机制
 public class P146LruCache {
     public static void main(String[] args) {
+        LinkedHashMap linkedHashMap = new LinkedHashMap<>();
         LRUCache lRUCache = new P146LruCache().new LRUCache(3);
         // TO TEST
         lRUCache.put(1, 1); // 缓存是 {1=1}
