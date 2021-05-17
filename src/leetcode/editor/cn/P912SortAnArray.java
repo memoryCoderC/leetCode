@@ -37,18 +37,93 @@ public class P912SortAnArray {
     public static void main(String[] args) {
         Solution solution = new P912SortAnArray().new Solution();
         // TO TEST
-        System.out.println(Arrays.toString(solution.sortArray(new int[]{5, 2, 3, 1})));
+        System.out.println(Arrays.toString(solution.sortArray(new int[]{-4, 0, 7, 4, 9, -5, -1, 0, -7, -1})));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
 
         public int[] sortArray(int[] nums) {
-            return insertionSort(nums);
+            quickSort(nums, 0, nums.length - 1);
+            return nums;
+        }
+
+        /**
+         * 快速排序
+         *
+         * @param nums
+         * @return
+         */
+        public void quickSort(int[] nums, int left, int right) {
+            if (left < right) {
+                int partition = partition(nums, left, right);
+                quickSort(nums, left, partition - 1);
+                quickSort(nums, partition + 1, right);
+            }
+        }
+
+        public int partition(int[] nums, int left, int right) {
+            int pivot = nums[left];
+            int i = left;
+            int j = right;
+            while (i < j) {
+                while (nums[j] > pivot && i < j) {
+                    j--;
+                }
+                if (i < j)
+                    nums[i++] = nums[j];
+                while (nums[i] <= pivot && i < j) {
+                    i++;
+                }
+                if (i < j)
+                    nums[j--] = nums[i];
+
+            }
+            nums[i] = pivot;
+            return i;
+        }
+
+        /**
+         * 归并排序
+         *
+         * @param nums
+         * @return
+         */
+        public int[] mergeSort(int[] nums) {
+            mergeSort(nums, 0, nums.length - 1);
+            return nums;
+        }
+
+        private void mergeSort(int[] nums, int left, int right) {
+            if (left >= right) {
+                return;
+            }
+            int mid = left + (right - left) / 2;//防止溢出！！
+            mergeSort(nums, left, mid);
+            mergeSort(nums, mid + 1, right);
+            mergeTwoArrays(nums, left, right, mid);
+        }
+
+        private void mergeTwoArrays(int[] nums, int low, int high, int mid) {
+            int[] tmp = new int[high - low + 1];
+            int i = low, j = mid + 1, k = 0;
+            while (i <= mid && j <= high) {
+                if (nums[i] < nums[j]) {
+                    tmp[k++] = nums[i++];
+                } else {
+                    tmp[k++] = nums[j++];
+                }
+            }
+            while (i <= mid) tmp[k++] = nums[i++];
+            while (j <= high) tmp[k++] = nums[j++];
+            for (int index = 0; index < k; index++) {
+                nums[low + index] = tmp[index];
+            }
         }
 
         /**
          * 插入排序
+         *
          * @param nums
          * @return
          */
