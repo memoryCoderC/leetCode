@@ -44,8 +44,45 @@ public class P912SortAnArray {
     class Solution {
 
         public int[] sortArray(int[] nums) {
-            quickSort(nums, 0, nums.length - 1);
+            return heapSort(nums);
+        }
+
+        /**
+         * 快速排序
+         *
+         * @param nums
+         * @return
+         */
+        public int[] heapSort(int[] nums) {
+            buildHeap(nums);
+            for (var i = nums.length - 1; i > 0; ) {
+                swap(nums, 0, i);
+                i--;
+                adjustHeap(nums, 0, i);
+            }
             return nums;
+        }
+
+        private void buildHeap(int[] nums) {
+            for (int i = (int) Math.floor(nums.length / 2); i >= 0; i--) {
+                adjustHeap(nums, i, nums.length);
+            }
+        }
+
+        private void adjustHeap(int[] nums, int i, int len) {
+            int leftChild = 2 * i + 1;
+            int rightChild = leftChild + 1;
+            int maxPos = i;
+            if (leftChild < len && nums[leftChild] > maxPos) {
+                maxPos = leftChild;
+            }
+            if (rightChild < len && nums[rightChild] > maxPos) {
+                maxPos = rightChild;
+            }
+            if (maxPos != i) {
+                swap(nums, maxPos, i);
+                adjustHeap(nums, i, len);
+            }
         }
 
         /**
