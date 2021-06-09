@@ -55,7 +55,7 @@ public class P912SortAnArray {
          */
         public int[] heapSort(int[] nums) {
             buildHeap(nums);
-            for (var i = nums.length - 1; i > 0; ) {
+            for (int i = nums.length - 1; i > 0; ) {
                 swap(nums, 0, i);
                 i--;
                 adjustHeap(nums, 0, i);
